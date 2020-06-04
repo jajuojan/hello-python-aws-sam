@@ -29,7 +29,7 @@ Resources:
       Policies:
         - S3WritePolicy:
             BucketName:
-              my-better-bucket
+              Ref: BucketNameParameter
       Environment:
         Variables:
           DOWNLOADURL: "https://my.better.example.url"
