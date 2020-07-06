@@ -7,13 +7,15 @@ Globals:
   Function:
     Timeout: 3
 
-Parameters: 
-  BucketNameParameter: 
+Parameters:
+  UrlToDownload:
     Type: String
-    Default: my-better-bucket
-    Description: Name of the output Bucket.
+    Default: https://my.better.example.url
+    Description: URL to download
 
 Resources:
+  HelloWorldBucket:
+    Type: AWS::S3::Bucket
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -29,12 +31,13 @@ Resources:
       Policies:
         - S3WritePolicy:
             BucketName:
-              Ref: BucketNameParameter
+              Ref: HelloWorldBucket
       Environment:
         Variables:
-          DOWNLOADURL: "https://my.better.example.url"
+          DOWNLOADURL:
+            Ref: UrlToDownload
           BUCKETNAME:
-            Ref: BucketNameParameter
+            Ref: HelloWorldBucket
           KEYNAME: "MyKey"
 
 Outputs:
